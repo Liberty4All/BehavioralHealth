@@ -27,6 +27,7 @@ namespace BehavioralHealth.Tests
         }
 
         [TestMethod]
+        [TestCategory("Unit")]
         public void Create_FirstNameNull_MissingValueError()
         {
             // Arrange
@@ -42,6 +43,7 @@ namespace BehavioralHealth.Tests
         }
 
         [TestMethod]
+        [TestCategory("Unit")]
         public void Create_LastNameNull_MissingValueError()
         {
             // Arrange
@@ -57,6 +59,7 @@ namespace BehavioralHealth.Tests
         }
 
         [TestMethod]
+        [TestCategory("Unit")]
         public void Create_BirthdateTooLongAgo_InvalidValueError()
         {
             // Arrange
@@ -69,6 +72,54 @@ namespace BehavioralHealth.Tests
             // Assert
             result.Should().Throw<ArgumentOutOfRangeException>()
                .WithMessage("More than 120 years ago\nParameter name: Date of Birth");
+        }
+
+        [TestMethod]
+        [TestCategory("Unit")]
+        public void Create_EthnicityNull_InvalidValueError()
+        {
+            // Arrange
+            Initialize();
+            ethnicity = null;
+
+            // Act
+            Action result = () => new Client(id, firstName, lastName, birthDate, gender, race, ethnicity);
+
+            // Assert
+            result.Should().Throw<ArgumentNullException>()
+                .WithMessage("Missing value\nParameter name: Ethnicity");
+        }
+
+        [TestMethod]
+        [TestCategory("Unit")]
+        public void Create_GenderNull_InvalidValueError()
+        {
+            // Arrange
+            Initialize();
+            gender = null;
+
+            // Act
+            Action result = () => new Client(id, firstName, lastName, birthDate, gender, race, ethnicity);
+
+            // Assert
+            result.Should().Throw<ArgumentNullException>()
+                .WithMessage("Missing value\nParameter name: Gender");
+        }
+
+        [TestMethod]
+        [TestCategory("Unit")]
+        public void Create_RaceNull_InvalidValueError()
+        {
+            // Arrange
+            Initialize();
+            race = null;
+
+            // Act
+            Action result = () => new Client(id, firstName, lastName, birthDate, gender, race, ethnicity);
+
+            // Assert
+            result.Should().Throw<ArgumentNullException>()
+                .WithMessage("Missing value\nParameter name: Race");
         }
     }
 }

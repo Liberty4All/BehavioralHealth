@@ -34,8 +34,22 @@ namespace BehavioralHealth.Domain
             }
             DateOfBirth = dateOfBirth;
 
+            if (gender is null)
+            {
+                throw new ArgumentNullException("Gender", "Missing value");
+            }
             Gender = gender;
+
+            if (race is null)
+            {
+                throw new ArgumentNullException("Race", "Missing value");
+            }
             Race = race;
+
+            if (ethnicity is null)
+            {
+                throw new ArgumentNullException("Ethnicity", "Missing value");
+            }
             Ethnicity = ethnicity;
         }
     }
