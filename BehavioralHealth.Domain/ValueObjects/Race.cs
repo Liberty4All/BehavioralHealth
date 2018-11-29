@@ -1,6 +1,8 @@
-﻿namespace BehavioralHealth.Domain
+﻿using BehavioralHealth.SharedKernel.Domain;
+
+namespace BehavioralHealth.Domain
 {
-    public class Race
+    public class Race : ValueObjectBase<Race>
     {
         public RaceType Value { get; }
         public string Text { get; }
@@ -41,6 +43,26 @@
                     throw new System.Exception($"Unknown raceType: {raceType}");
             }
         }
+
+        public override bool Equals(Race other)
+        {
+            return this.Value == other.Value;
+        }
+
+        public override bool Equals(object obj)
+        {
+            if (obj == null)
+            {
+                return false;
+            }
+            if (!(obj is Race))
+            {
+                return false;
+            }
+            return this.Equals((Race)obj);
+        }
+
+        public override int GetHashCode() => this.Value.GetHashCode() + Text.GetHashCode();
     }
 
     public enum RaceType

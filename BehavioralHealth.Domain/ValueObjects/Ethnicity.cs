@@ -1,8 +1,9 @@
-﻿using System.Collections.Generic;
+﻿using BehavioralHealth.SharedKernel.Domain;
+using System.Collections.Generic;
 
 namespace BehavioralHealth.Domain
 {
-    public class Ethnicity
+    public class Ethnicity : ValueObjectBase<Ethnicity>
     {
         public EthnicityType Value { get; }
         public string Text { get; }
@@ -54,6 +55,26 @@ namespace BehavioralHealth.Domain
 
             return result;
         }
+
+        public override bool Equals(Ethnicity other)
+        {
+            return this.Value == other.Value;
+        }
+
+        public override bool Equals(object obj)
+        {
+            if (obj == null)
+            {
+                return false;
+            }
+            if (!(obj is Ethnicity))
+            {
+                return false;
+            }
+            return this.Equals((Ethnicity)obj);
+        }
+
+        public override int GetHashCode() => this.Value.GetHashCode() + Text.GetHashCode();
     }
 
     public enum EthnicityType

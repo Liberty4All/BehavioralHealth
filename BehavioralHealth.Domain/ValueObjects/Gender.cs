@@ -1,8 +1,9 @@
-﻿using System.Collections.Generic;
+﻿using BehavioralHealth.SharedKernel.Domain;
+using System.Collections.Generic;
 
 namespace BehavioralHealth.Domain
 {
-    public class Gender
+    public class Gender : ValueObjectBase<Gender>
     {
         public GenderType Value { get; }
         public string Text { get; }
@@ -36,6 +37,29 @@ namespace BehavioralHealth.Domain
             };
 
             return result;
+        }
+
+        public override bool Equals(Gender other)
+        {
+            return this.Value == other.Value;
+        }
+
+        public override bool Equals(object obj)
+        {
+            if (obj == null)
+            {
+                return false;
+            }
+            if (!(obj is Gender))
+            {
+                return false;
+            }
+            return this.Equals((Gender)obj);
+        }
+
+        public override int GetHashCode()
+        {
+            throw new System.NotImplementedException();
         }
     }
 
