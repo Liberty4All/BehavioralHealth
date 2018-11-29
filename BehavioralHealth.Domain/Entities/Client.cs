@@ -1,7 +1,5 @@
 ﻿using BehavioralHealth.SharedKernel.Domain;
 using System;
-using System.Collections.Generic;
-using System.Text;
 
 namespace BehavioralHealth.Domain
 {
