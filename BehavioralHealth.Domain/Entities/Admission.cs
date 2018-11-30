@@ -39,26 +39,48 @@ namespace BehavioralHealth.Domain.Domain
         public Admission(int id, DateTime dateOfFirstContact, DateTime admissionDate, bool completelyPaidByMedicaid, LevelOfCare levelOfCare, ReferredBy referredBy, MaritalStatus maritalStatus, EducationLevel educationLevel, EducationEnrollment educationEnrollment, EmploymentStatus employmentStatus, SourceOfIncomeSupport sourceOfIncomeSupport, LivingArrangement livingArrangement, PriorAODTxtEpisodes priorAODTxtEpisodes, bool mentalHealthHistory, Diagnoses diagnoses, OpioidReplacementTherapy opioidReplacementTherapy, int numberOfChildrenUnder18, SpecialPopulation specialPopulation, bool childBirthWithinLast5Years, int numberOfBirths, bool clientPregnant, StageOfPregnancy stageOfPregnancy, MilitaryStatus militaryStatus, bool servedInIraq, bool servedInAfghanistan, int alcoholAgeOfFirstIntox, DrugUse drugUse, int numberOfArrestsPast30Days, Reimbursement reimbursement, SelfHelp selfHelp)
         {
             this.id = id;
-            if (admissionDate < dateOfFirstContact)
-            {
-                throw new ArgumentException("Admission Date cannot be before Date of First Contact", "Admission Date");
-            }
+            RaiseIfTooOld("Date of First Contact",dateOfFirstContact, new DateTime(2000,1,1));
+            RaiseIfTooOld("Admission Date",admissionDate,new DateTime(2000, 1, 1));
+            RaiseIfDateTooEarly("Admission Date", admissionDate, "Date of First Contact", dateOfFirstContact);
             this.dateOfFirstContact = dateOfFirstContact;
             this.admissionDate = admissionDate;
             this.completelyPaidByMedicaid = completelyPaidByMedicaid;
+
+            RaiseIfNull("Level of Care", levelOfCare);
             this.levelOfCare = levelOfCare;
+
+            RaiseIfNull("Referred By", referredBy);
             this.referredBy = referredBy;
+
+            RaiseIfNull("Marital Status", maritalStatus);
             this.maritalStatus = maritalStatus;
+
+            RaiseIfNull("Education Level", educationLevel);
             this.educationLevel = educationLevel;
+
+            RaiseIfNull("Education Enrollment", educationEnrollment);
             this.educationEnrollment = educationEnrollment;
+
+            RaiseIfNull("Employment Status", employmentStatus);
             this.employmentStatus = employmentStatus;
+
+            RaiseIfNull("Source of Income Support", sourceOfIncomeSupport);
             this.sourceOfIncomeSupport = sourceOfIncomeSupport;
+
+            //RaiseIfNull("Living Arrangement", livingArrangement);
             this.livingArrangement = livingArrangement;
+
+            //RaiseIfNull("Prior AOD Treatment Episodes", priorAODTxtEpisodes);
             this.priorAODTxtEpisodes = priorAODTxtEpisodes;
+
+            //RaiseIfNull("", );
             this.mentalHealthHistory = mentalHealthHistory;
             this.diagnoses = diagnoses;
             this.opioidReplacementTherapy = opioidReplacementTherapy;
+
+            RaiseIfNotInRange("Number of Children Under 18", numberOfChildrenUnder18, 0, 99);
             this.numberOfChildrenUnder18 = numberOfChildrenUnder18;
+
             this.specialPopulation = specialPopulation;
             this.childBirthWithinLast5Years = childBirthWithinLast5Years;
             this.numberOfBirths = numberOfBirths;
@@ -72,6 +94,43 @@ namespace BehavioralHealth.Domain.Domain
             this.numberOfArrestsPast30Days = numberOfArrestsPast30Days;
             this.reimbursement = reimbursement;
             this.selfHelp = selfHelp;
+        }
+
+        private void RaiseIfNotInRange(string paramName, int paramValue, int lower, int upper)
+        {
+            if (paramValue < lower)
+            {
+                throw new ArgumentOutOfRangeException(paramName, $"{paramName} cannot be less than {lower}");
+            }
+            if (paramValue > upper)
+            {
+                throw new ArgumentOutOfRangeException(paramName, $"{paramName} cannot be more than {upper}");
+            }
+        }
+
+        private void RaiseIfNull(string parameterName, object parameter)
+        {
+            if (parameter is null)
+            {
+                throw new ArgumentNullException($"{parameterName}", $"{parameterName} cannot be null");
+            }
+        }
+
+        private void RaiseIfDateTooEarly(string param1, DateTime date1, string param2, DateTime date2)
+        {
+            if (date1 < date2)
+            {
+                throw new ArgumentException($"{param1} cannot be before {param2}",param1);
+            }
+        }
+
+        private static void RaiseIfTooOld(string parameterName, DateTime checkDate, DateTime thresholdDate)
+        {
+            var dateString = thresholdDate.ToString("MMMM d, yyyy");
+            if (checkDate < thresholdDate)
+            {
+                throw new ArgumentOutOfRangeException($"{parameterName}", $"{parameterName} cannot be before {dateString}");
+            }
         }
     }
 }

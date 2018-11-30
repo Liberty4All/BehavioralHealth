@@ -2,6 +2,7 @@ using BehavioralHealth.Domain;
 using BehavioralHealth.Domain.Domain;
 using BehavioralHealth.Domain.ValueObjects;
 using FluentAssertions;
+using FluentAssertions.Extensions;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using System;
 
@@ -100,11 +101,7 @@ namespace BehavioralHealth.Tests
 
             // Act
             Action result = () => new Admission(id, DateOfFirstContact, AdmissionDate, CompletelyPaidByMedicaid, LevelOfCare,
-                //"NotConsistentWithAssessment" type="bh:NotConsistentWithAssessmentDef" minOccurs="0"/>
-            //"GamblingDisorderScreen" type="boolean" minOccurs="0"/>
-            //"GamblingDisorderAssessment" type="boolean" minOccurs="0"/>
-            //"ProviderEpisodeNumber" type="bh:ProviderEpisodeNumberDef" minOccurs="0"/>
-                ReferredBy, MaritalStatus, EducationLevel, EducationEnrollment, EmploymentStatus, SourceOfIncomeSupport,
+                 ReferredBy, MaritalStatus, EducationLevel, EducationEnrollment, EmploymentStatus, SourceOfIncomeSupport,
                 LivingArrangement, PriorAODTxtEpisodes, MentalHealthHistory, Diagnoses, OpioidReplacementTherapy,
                 NumberOfChildrenUnder18, SpecialPopulation, ChildBirthWithinLast5Years, NumberOfBirths, ClientPregnant,
                 StageOfPregnancy, MilitaryStatus, ServedInIraq, ServedInAfghanistan, AlcoholAgeOfFirstIntox, DrugUse,
@@ -115,84 +112,236 @@ namespace BehavioralHealth.Tests
                 .WithMessage("Admission Date cannot be before Date of First Contact\nParameter name: Admission Date");
         }
 
-        //[TestMethod]
-        //[TestCategory("Unit")]
-        //public void Create_LastNameNull_MissingValueError()
-        //{
-        //    // Arrange
-        //    Initialize();
-        //    lastName = null;
+        [TestMethod]
+        [TestCategory("Unit")]
+        public void Create_DateOfFirstContactTooOld_InvalidValueError()
+        {
+            // Arrange
+            Initialize();
+            DateOfFirstContact = 31.December(1999);
 
-        //    // Act
-        //    Action result = () => new Client(id, firstName, lastName, birthDate, gender, race, ethnicity);
+            // Act
+            Action result = () => new Admission(id, DateOfFirstContact, AdmissionDate, CompletelyPaidByMedicaid, LevelOfCare,
+                 ReferredBy, MaritalStatus, EducationLevel, EducationEnrollment, EmploymentStatus, SourceOfIncomeSupport,
+                LivingArrangement, PriorAODTxtEpisodes, MentalHealthHistory, Diagnoses, OpioidReplacementTherapy,
+                NumberOfChildrenUnder18, SpecialPopulation, ChildBirthWithinLast5Years, NumberOfBirths, ClientPregnant,
+                StageOfPregnancy, MilitaryStatus, ServedInIraq, ServedInAfghanistan, AlcoholAgeOfFirstIntox, DrugUse,
+                NumberOfArrestsPast30Days, Reimbursement, SelfHelp);
 
-        //    // Assert
-        //    result.Should().Throw<ArgumentNullException>()
-        //        .WithMessage("Missing value\nParameter name: Last Name");
-        //}
+            // Assert
+            result.Should().Throw<ArgumentOutOfRangeException>()
+                .WithMessage("Date of First Contact cannot be before January 1, 2000\nParameter name: Date of First Contact");
+        }
 
-        //[TestMethod]
-        //[TestCategory("Unit")]
-        //public void Create_BirthdateTooLongAgo_InvalidValueError()
-        //{
-        //    // Arrange
-        //    Initialize();
-        //    birthDate = DateTime.Now.Date.AddYears(-121);
+        [TestMethod]
+        [TestCategory("Unit")]
+        public void Create_AdmissionDateTooOld_InvalidValueError()
+        {
+            // Arrange
+            Initialize();
+            AdmissionDate = 31.December(1999);
 
-        //    // Act
-        //    Action result = () => new Client(id, firstName, lastName, birthDate, gender, race, ethnicity);
+            // Act
+            Action result = () => new Admission(id, DateOfFirstContact, AdmissionDate, CompletelyPaidByMedicaid, LevelOfCare,
+                ReferredBy, MaritalStatus, EducationLevel, EducationEnrollment, EmploymentStatus, SourceOfIncomeSupport,
+                LivingArrangement, PriorAODTxtEpisodes, MentalHealthHistory, Diagnoses, OpioidReplacementTherapy,
+                NumberOfChildrenUnder18, SpecialPopulation, ChildBirthWithinLast5Years, NumberOfBirths, ClientPregnant,
+                StageOfPregnancy, MilitaryStatus, ServedInIraq, ServedInAfghanistan, AlcoholAgeOfFirstIntox, DrugUse,
+                NumberOfArrestsPast30Days, Reimbursement, SelfHelp);
 
-        //    // Assert
-        //    result.Should().Throw<ArgumentOutOfRangeException>()
-        //       .WithMessage("More than 120 years ago\nParameter name: Date of Birth");
-        //}
+            // Assert
+            result.Should().Throw<ArgumentOutOfRangeException>()
+                .WithMessage("Admission Date cannot be before January 1, 2000\nParameter name: Admission Date");
+        }
 
-        //[TestMethod]
-        //[TestCategory("Unit")]
-        //public void Create_EthnicityNull_InvalidValueError()
-        //{
-        //    // Arrange
-        //    Initialize();
-        //    ethnicity = null;
+        [TestMethod]
+        [TestCategory("Unit")]
+        public void Create_LevelOfCareNull_NullValueError()
+        {
+            // Arrange
+            Initialize();
+            LevelOfCare = null;
 
-        //    // Act
-        //    Action result = () => new Client(id, firstName, lastName, birthDate, gender, race, ethnicity);
+            // Act
+            Action result = () => new Admission(id, DateOfFirstContact, AdmissionDate, CompletelyPaidByMedicaid, LevelOfCare,
+                ReferredBy, MaritalStatus, EducationLevel, EducationEnrollment, EmploymentStatus, SourceOfIncomeSupport,
+                LivingArrangement, PriorAODTxtEpisodes, MentalHealthHistory, Diagnoses, OpioidReplacementTherapy,
+                NumberOfChildrenUnder18, SpecialPopulation, ChildBirthWithinLast5Years, NumberOfBirths, ClientPregnant,
+                StageOfPregnancy, MilitaryStatus, ServedInIraq, ServedInAfghanistan, AlcoholAgeOfFirstIntox, DrugUse,
+                NumberOfArrestsPast30Days, Reimbursement, SelfHelp);
 
-        //    // Assert
-        //    result.Should().Throw<ArgumentNullException>()
-        //        .WithMessage("Missing value\nParameter name: Ethnicity");
-        //}
+            // Assert
+            result.Should().Throw<ArgumentNullException>()
+                .WithMessage("Level of Care cannot be null\nParameter name: Level of Care");
+        }
 
-        //[TestMethod]
-        //[TestCategory("Unit")]
-        //public void Create_GenderNull_InvalidValueError()
-        //{
-        //    // Arrange
-        //    Initialize();
-        //    gender = null;
+        [TestMethod]
+        [TestCategory("Unit")]
+        public void Create_ReferredByNull_NullValueError()
+        {
+            // Arrange
+            Initialize();
+            ReferredBy = null;
 
-        //    // Act
-        //    Action result = () => new Client(id, firstName, lastName, birthDate, gender, race, ethnicity);
+            // Act
+            Action result = () => new Admission(id, DateOfFirstContact, AdmissionDate, CompletelyPaidByMedicaid, LevelOfCare,
+                ReferredBy, MaritalStatus, EducationLevel, EducationEnrollment, EmploymentStatus, SourceOfIncomeSupport,
+                LivingArrangement, PriorAODTxtEpisodes, MentalHealthHistory, Diagnoses, OpioidReplacementTherapy,
+                NumberOfChildrenUnder18, SpecialPopulation, ChildBirthWithinLast5Years, NumberOfBirths, ClientPregnant,
+                StageOfPregnancy, MilitaryStatus, ServedInIraq, ServedInAfghanistan, AlcoholAgeOfFirstIntox, DrugUse,
+                NumberOfArrestsPast30Days, Reimbursement, SelfHelp);
 
-        //    // Assert
-        //    result.Should().Throw<ArgumentNullException>()
-        //        .WithMessage("Missing value\nParameter name: Gender");
-        //}
+            // Assert
+            result.Should().Throw<ArgumentNullException>()
+                .WithMessage("Referred By cannot be null\nParameter name: Referred By");
+        }
 
-        //[TestMethod]
-        //[TestCategory("Unit")]
-        //public void Create_RaceNull_InvalidValueError()
-        //{
-        //    // Arrange
-        //    Initialize();
-        //    race = null;
+        [TestMethod]
+        [TestCategory("Unit")]
+        public void Create_MaritalStatusNull_NullValueError()
+        {
+            // Arrange
+            Initialize();
+            MaritalStatus = null;
 
-        //    // Act
-        //    Action result = () => new Client(id, firstName, lastName, birthDate, gender, race, ethnicity);
+            // Act
+            Action result = () => new Admission(id, DateOfFirstContact, AdmissionDate, CompletelyPaidByMedicaid, LevelOfCare,
+                ReferredBy, MaritalStatus, EducationLevel, EducationEnrollment, EmploymentStatus, SourceOfIncomeSupport,
+                LivingArrangement, PriorAODTxtEpisodes, MentalHealthHistory, Diagnoses, OpioidReplacementTherapy,
+                NumberOfChildrenUnder18, SpecialPopulation, ChildBirthWithinLast5Years, NumberOfBirths, ClientPregnant,
+                StageOfPregnancy, MilitaryStatus, ServedInIraq, ServedInAfghanistan, AlcoholAgeOfFirstIntox, DrugUse,
+                NumberOfArrestsPast30Days, Reimbursement, SelfHelp);
 
-        //    // Assert
-        //    result.Should().Throw<ArgumentNullException>()
-        //        .WithMessage("Missing value\nParameter name: Race");
-        //}
+            // Assert
+            result.Should().Throw<ArgumentNullException>()
+                .WithMessage("Marital Status cannot be null\nParameter name: Marital Status");
+        }
+
+        [TestMethod]
+        [TestCategory("Unit")]
+        public void Create_EducationLevelNull_NullValueError()
+        {
+            // Arrange
+            Initialize();
+            EducationLevel = null;
+
+            // Act
+            Action result = () => new Admission(id, DateOfFirstContact, AdmissionDate, CompletelyPaidByMedicaid, LevelOfCare,
+                ReferredBy, MaritalStatus, EducationLevel, EducationEnrollment, EmploymentStatus, SourceOfIncomeSupport,
+                LivingArrangement, PriorAODTxtEpisodes, MentalHealthHistory, Diagnoses, OpioidReplacementTherapy,
+                NumberOfChildrenUnder18, SpecialPopulation, ChildBirthWithinLast5Years, NumberOfBirths, ClientPregnant,
+                StageOfPregnancy, MilitaryStatus, ServedInIraq, ServedInAfghanistan, AlcoholAgeOfFirstIntox, DrugUse,
+                NumberOfArrestsPast30Days, Reimbursement, SelfHelp);
+
+            // Assert
+            result.Should().Throw<ArgumentNullException>()
+                .WithMessage("Education Level cannot be null\nParameter name: Education Level");
+        }
+
+        [TestMethod]
+        [TestCategory("Unit")]
+        public void Create_EducationEnrollmentNull_NullValueError()
+        {
+            // Arrange
+            Initialize();
+            EducationEnrollment = null;
+
+            // Act
+            Action result = () => new Admission(id, DateOfFirstContact, AdmissionDate, CompletelyPaidByMedicaid, LevelOfCare,
+                ReferredBy, MaritalStatus, EducationLevel, EducationEnrollment, EmploymentStatus, SourceOfIncomeSupport,
+                LivingArrangement, PriorAODTxtEpisodes, MentalHealthHistory, Diagnoses, OpioidReplacementTherapy,
+                NumberOfChildrenUnder18, SpecialPopulation, ChildBirthWithinLast5Years, NumberOfBirths, ClientPregnant,
+                StageOfPregnancy, MilitaryStatus, ServedInIraq, ServedInAfghanistan, AlcoholAgeOfFirstIntox, DrugUse,
+                NumberOfArrestsPast30Days, Reimbursement, SelfHelp);
+
+            // Assert
+            result.Should().Throw<ArgumentNullException>()
+                .WithMessage("Education Enrollment cannot be null\nParameter name: Education Enrollment");
+        }
+
+        [TestMethod]
+        [TestCategory("Unit")]
+        public void Create_EmploymentStatusNull_NullValueError()
+        {
+            // Arrange
+            Initialize();
+            EmploymentStatus = null;
+
+            // Act
+            Action result = () => new Admission(id, DateOfFirstContact, AdmissionDate, CompletelyPaidByMedicaid, LevelOfCare,
+                ReferredBy, MaritalStatus, EducationLevel, EducationEnrollment, EmploymentStatus, SourceOfIncomeSupport,
+                LivingArrangement, PriorAODTxtEpisodes, MentalHealthHistory, Diagnoses, OpioidReplacementTherapy,
+                NumberOfChildrenUnder18, SpecialPopulation, ChildBirthWithinLast5Years, NumberOfBirths, ClientPregnant,
+                StageOfPregnancy, MilitaryStatus, ServedInIraq, ServedInAfghanistan, AlcoholAgeOfFirstIntox, DrugUse,
+                NumberOfArrestsPast30Days, Reimbursement, SelfHelp);
+
+            // Assert
+            result.Should().Throw<ArgumentNullException>()
+                .WithMessage("Employment Status cannot be null\nParameter name: Employment Status");
+        }
+
+        [TestMethod]
+        [TestCategory("Unit")]
+        public void Create_SourceOfIncomeSupportNull_NullValueError()
+        {
+            // Arrange
+            Initialize();
+            SourceOfIncomeSupport = null;
+
+            // Act
+            Action result = () => new Admission(id, DateOfFirstContact, AdmissionDate, CompletelyPaidByMedicaid, LevelOfCare,
+                ReferredBy, MaritalStatus, EducationLevel, EducationEnrollment, EmploymentStatus, SourceOfIncomeSupport,
+                LivingArrangement, PriorAODTxtEpisodes, MentalHealthHistory, Diagnoses, OpioidReplacementTherapy,
+                NumberOfChildrenUnder18, SpecialPopulation, ChildBirthWithinLast5Years, NumberOfBirths, ClientPregnant,
+                StageOfPregnancy, MilitaryStatus, ServedInIraq, ServedInAfghanistan, AlcoholAgeOfFirstIntox, DrugUse,
+                NumberOfArrestsPast30Days, Reimbursement, SelfHelp);
+
+            // Assert
+            result.Should().Throw<ArgumentNullException>()
+                .WithMessage("Source of Income Support cannot be null\nParameter name: Source of Income Support");
+        }
+
+        [TestMethod]
+        [TestCategory("Unit")]
+        public void Create_NumberOfChildrenUnder18LessThanZero_ValueOutOfRangeError()
+        {
+            // Arrange
+            Initialize();
+            NumberOfChildrenUnder18 = -1;
+
+            // Act
+            Action result = () => new Admission(id, DateOfFirstContact, AdmissionDate, CompletelyPaidByMedicaid, LevelOfCare,
+                ReferredBy, MaritalStatus, EducationLevel, EducationEnrollment, EmploymentStatus, SourceOfIncomeSupport,
+                LivingArrangement, PriorAODTxtEpisodes, MentalHealthHistory, Diagnoses, OpioidReplacementTherapy,
+                NumberOfChildrenUnder18, SpecialPopulation, ChildBirthWithinLast5Years, NumberOfBirths, ClientPregnant,
+                StageOfPregnancy, MilitaryStatus, ServedInIraq, ServedInAfghanistan, AlcoholAgeOfFirstIntox, DrugUse,
+                NumberOfArrestsPast30Days, Reimbursement, SelfHelp);
+
+            // Assert
+            result.Should().Throw<ArgumentOutOfRangeException>()
+                .WithMessage("Number of Children Under 18 cannot be less than 0\nParameter name: Number of Children Under 18");
+        }
+
+        [TestMethod]
+        [TestCategory("Unit")]
+        public void Create_NumberOfChildrenUnder18MoreThan99_ValueOutOfRangeError()
+        {
+            // Arrange
+            Initialize();
+            NumberOfChildrenUnder18 = 100;
+
+            // Act
+            Action result = () => new Admission(id, DateOfFirstContact, AdmissionDate, CompletelyPaidByMedicaid, LevelOfCare,
+                ReferredBy, MaritalStatus, EducationLevel, EducationEnrollment, EmploymentStatus, SourceOfIncomeSupport,
+                LivingArrangement, PriorAODTxtEpisodes, MentalHealthHistory, Diagnoses, OpioidReplacementTherapy,
+                NumberOfChildrenUnder18, SpecialPopulation, ChildBirthWithinLast5Years, NumberOfBirths, ClientPregnant,
+                StageOfPregnancy, MilitaryStatus, ServedInIraq, ServedInAfghanistan, AlcoholAgeOfFirstIntox, DrugUse,
+                NumberOfArrestsPast30Days, Reimbursement, SelfHelp);
+
+            // Assert
+            result.Should().Throw<ArgumentOutOfRangeException>()
+                .WithMessage("Number of Children Under 18 cannot be more than 99\nParameter name: Number of Children Under 18");
+        }
+        //Start here: Special Population
     }
 }
