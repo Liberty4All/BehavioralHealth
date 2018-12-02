@@ -35,10 +35,12 @@ namespace BehavioralHealth.Domain.Domain
         private readonly int numberOfArrestsPast30Days;
         private readonly Reimbursement reimbursement;
         private readonly SelfHelp selfHelp;
+        private readonly Client client;
 
-        public Admission(int id, DateTime dateOfFirstContact, DateTime admissionDate, bool completelyPaidByMedicaid, LevelOfCare levelOfCare, ReferredBy referredBy, MaritalStatus maritalStatus, EducationLevel educationLevel, EducationEnrollment educationEnrollment, EmploymentStatus employmentStatus, SourceOfIncomeSupport sourceOfIncomeSupport, LivingArrangement livingArrangement, PriorAODTxtEpisodes priorAODTxtEpisodes, bool mentalHealthHistory, Diagnoses diagnoses, OpioidReplacementTherapy opioidReplacementTherapy, int numberOfChildrenUnder18, SpecialPopulation specialPopulation, bool childBirthWithinLast5Years, int numberOfBirths, bool clientPregnant, StageOfPregnancy stageOfPregnancy, MilitaryStatus militaryStatus, bool servedInIraq, bool servedInAfghanistan, int alcoholAgeOfFirstIntox, DrugUse drugUse, int numberOfArrestsPast30Days, Reimbursement reimbursement, SelfHelp selfHelp)
+        public Admission(int id, Client client, DateTime dateOfFirstContact, DateTime admissionDate, bool completelyPaidByMedicaid, LevelOfCare levelOfCare, ReferredBy referredBy, MaritalStatus maritalStatus, EducationLevel educationLevel, EducationEnrollment educationEnrollment, EmploymentStatus employmentStatus, SourceOfIncomeSupport sourceOfIncomeSupport, LivingArrangement livingArrangement, PriorAODTxtEpisodes priorAODTxtEpisodes, bool mentalHealthHistory, Diagnoses diagnoses, OpioidReplacementTherapy opioidReplacementTherapy, int numberOfChildrenUnder18, SpecialPopulation specialPopulation, bool childBirthWithinLast5Years, int numberOfBirths, bool clientPregnant, StageOfPregnancy stageOfPregnancy, MilitaryStatus militaryStatus, bool servedInIraq, bool servedInAfghanistan, int alcoholAgeOfFirstIntox, DrugUse drugUse, int numberOfArrestsPast30Days, Reimbursement reimbursement, SelfHelp selfHelp)
         {
             this.id = id;
+            RaiseIfClientIsNull("Admission Client", client);
             RaiseIfTooOld("Date of First Contact",dateOfFirstContact, new DateTime(2000,1,1));
             RaiseIfTooOld("Admission Date",admissionDate,new DateTime(2000, 1, 1));
             RaiseIfDateTooEarly("Admission Date", admissionDate, "Date of First Contact", dateOfFirstContact);
@@ -82,7 +84,11 @@ namespace BehavioralHealth.Domain.Domain
             this.numberOfChildrenUnder18 = numberOfChildrenUnder18;
 
             this.specialPopulation = specialPopulation;
+
+            RaiseIfChildbirthTrueAndClientIsMale("Childbirth Within Last 5 Years", childBirthWithinLast5Years, client.Gender);
             this.childBirthWithinLast5Years = childBirthWithinLast5Years;
+
+
             this.numberOfBirths = numberOfBirths;
             this.clientPregnant = clientPregnant;
             this.stageOfPregnancy = stageOfPregnancy;
@@ -94,6 +100,19 @@ namespace BehavioralHealth.Domain.Domain
             this.numberOfArrestsPast30Days = numberOfArrestsPast30Days;
             this.reimbursement = reimbursement;
             this.selfHelp = selfHelp;
+        }
+
+        private void RaiseIfClientIsNull(string paramName, Client client)
+        {
+            if (client is null)
+            {
+                throw new ArgumentException("Client cannot be null", paramName);
+            };
+        }
+
+        private void RaiseIfChildbirthTrueAndClientIsMale(string paramName, bool childBirthWithinLast5Years, Gender gender)
+        {
+            throw new NotImplementedException();
         }
 
         private void RaiseIfNotInRange(string paramName, int paramValue, int lower, int upper)

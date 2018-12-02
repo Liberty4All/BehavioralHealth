@@ -13,6 +13,7 @@ namespace BehavioralHealth.Tests
     {
         int id = 0;
 
+        Client currentClient = new Client(5, "Bob", "Tester", 10.October(1964), new Gender(GenderType.Male), new Race(RaceType.White), new Ethnicity(EthnicityType.NotOfHispanicOrigin));
         DateTime DateOfFirstContact;
         DateTime AdmissionDate;
         bool CompletelyPaidByMedicaid;
@@ -100,7 +101,7 @@ namespace BehavioralHealth.Tests
             AdmissionDate = DateOfFirstContact.Date.AddDays(-1);
 
             // Act
-            Action result = () => new Admission(id, DateOfFirstContact, AdmissionDate, CompletelyPaidByMedicaid, LevelOfCare,
+            Action result = () => new Admission(id, currentClient, DateOfFirstContact, AdmissionDate, CompletelyPaidByMedicaid, LevelOfCare,
                  ReferredBy, MaritalStatus, EducationLevel, EducationEnrollment, EmploymentStatus, SourceOfIncomeSupport,
                 LivingArrangement, PriorAODTxtEpisodes, MentalHealthHistory, Diagnoses, OpioidReplacementTherapy,
                 NumberOfChildrenUnder18, SpecialPopulation, ChildBirthWithinLast5Years, NumberOfBirths, ClientPregnant,
@@ -121,7 +122,7 @@ namespace BehavioralHealth.Tests
             DateOfFirstContact = 31.December(1999);
 
             // Act
-            Action result = () => new Admission(id, DateOfFirstContact, AdmissionDate, CompletelyPaidByMedicaid, LevelOfCare,
+            Action result = () => new Admission(id, currentClient, DateOfFirstContact, AdmissionDate, CompletelyPaidByMedicaid, LevelOfCare,
                  ReferredBy, MaritalStatus, EducationLevel, EducationEnrollment, EmploymentStatus, SourceOfIncomeSupport,
                 LivingArrangement, PriorAODTxtEpisodes, MentalHealthHistory, Diagnoses, OpioidReplacementTherapy,
                 NumberOfChildrenUnder18, SpecialPopulation, ChildBirthWithinLast5Years, NumberOfBirths, ClientPregnant,
@@ -142,7 +143,7 @@ namespace BehavioralHealth.Tests
             AdmissionDate = 31.December(1999);
 
             // Act
-            Action result = () => new Admission(id, DateOfFirstContact, AdmissionDate, CompletelyPaidByMedicaid, LevelOfCare,
+            Action result = () => new Admission(id, currentClient, DateOfFirstContact, AdmissionDate, CompletelyPaidByMedicaid, LevelOfCare,
                 ReferredBy, MaritalStatus, EducationLevel, EducationEnrollment, EmploymentStatus, SourceOfIncomeSupport,
                 LivingArrangement, PriorAODTxtEpisodes, MentalHealthHistory, Diagnoses, OpioidReplacementTherapy,
                 NumberOfChildrenUnder18, SpecialPopulation, ChildBirthWithinLast5Years, NumberOfBirths, ClientPregnant,
@@ -163,7 +164,7 @@ namespace BehavioralHealth.Tests
             LevelOfCare = null;
 
             // Act
-            Action result = () => new Admission(id, DateOfFirstContact, AdmissionDate, CompletelyPaidByMedicaid, LevelOfCare,
+            Action result = () => new Admission(id, currentClient, DateOfFirstContact, AdmissionDate, CompletelyPaidByMedicaid, LevelOfCare,
                 ReferredBy, MaritalStatus, EducationLevel, EducationEnrollment, EmploymentStatus, SourceOfIncomeSupport,
                 LivingArrangement, PriorAODTxtEpisodes, MentalHealthHistory, Diagnoses, OpioidReplacementTherapy,
                 NumberOfChildrenUnder18, SpecialPopulation, ChildBirthWithinLast5Years, NumberOfBirths, ClientPregnant,
@@ -184,7 +185,7 @@ namespace BehavioralHealth.Tests
             ReferredBy = null;
 
             // Act
-            Action result = () => new Admission(id, DateOfFirstContact, AdmissionDate, CompletelyPaidByMedicaid, LevelOfCare,
+            Action result = () => new Admission(id, currentClient, DateOfFirstContact, AdmissionDate, CompletelyPaidByMedicaid, LevelOfCare,
                 ReferredBy, MaritalStatus, EducationLevel, EducationEnrollment, EmploymentStatus, SourceOfIncomeSupport,
                 LivingArrangement, PriorAODTxtEpisodes, MentalHealthHistory, Diagnoses, OpioidReplacementTherapy,
                 NumberOfChildrenUnder18, SpecialPopulation, ChildBirthWithinLast5Years, NumberOfBirths, ClientPregnant,
@@ -205,7 +206,7 @@ namespace BehavioralHealth.Tests
             MaritalStatus = null;
 
             // Act
-            Action result = () => new Admission(id, DateOfFirstContact, AdmissionDate, CompletelyPaidByMedicaid, LevelOfCare,
+            Action result = () => new Admission(id, currentClient, DateOfFirstContact, AdmissionDate, CompletelyPaidByMedicaid, LevelOfCare,
                 ReferredBy, MaritalStatus, EducationLevel, EducationEnrollment, EmploymentStatus, SourceOfIncomeSupport,
                 LivingArrangement, PriorAODTxtEpisodes, MentalHealthHistory, Diagnoses, OpioidReplacementTherapy,
                 NumberOfChildrenUnder18, SpecialPopulation, ChildBirthWithinLast5Years, NumberOfBirths, ClientPregnant,
@@ -226,7 +227,7 @@ namespace BehavioralHealth.Tests
             EducationLevel = null;
 
             // Act
-            Action result = () => new Admission(id, DateOfFirstContact, AdmissionDate, CompletelyPaidByMedicaid, LevelOfCare,
+            Action result = () => new Admission(id, currentClient, DateOfFirstContact, AdmissionDate, CompletelyPaidByMedicaid, LevelOfCare,
                 ReferredBy, MaritalStatus, EducationLevel, EducationEnrollment, EmploymentStatus, SourceOfIncomeSupport,
                 LivingArrangement, PriorAODTxtEpisodes, MentalHealthHistory, Diagnoses, OpioidReplacementTherapy,
                 NumberOfChildrenUnder18, SpecialPopulation, ChildBirthWithinLast5Years, NumberOfBirths, ClientPregnant,
@@ -247,7 +248,7 @@ namespace BehavioralHealth.Tests
             EducationEnrollment = null;
 
             // Act
-            Action result = () => new Admission(id, DateOfFirstContact, AdmissionDate, CompletelyPaidByMedicaid, LevelOfCare,
+            Action result = () => new Admission(id, currentClient, DateOfFirstContact, AdmissionDate, CompletelyPaidByMedicaid, LevelOfCare,
                 ReferredBy, MaritalStatus, EducationLevel, EducationEnrollment, EmploymentStatus, SourceOfIncomeSupport,
                 LivingArrangement, PriorAODTxtEpisodes, MentalHealthHistory, Diagnoses, OpioidReplacementTherapy,
                 NumberOfChildrenUnder18, SpecialPopulation, ChildBirthWithinLast5Years, NumberOfBirths, ClientPregnant,
@@ -268,7 +269,7 @@ namespace BehavioralHealth.Tests
             EmploymentStatus = null;
 
             // Act
-            Action result = () => new Admission(id, DateOfFirstContact, AdmissionDate, CompletelyPaidByMedicaid, LevelOfCare,
+            Action result = () => new Admission(id, currentClient, DateOfFirstContact, AdmissionDate, CompletelyPaidByMedicaid, LevelOfCare,
                 ReferredBy, MaritalStatus, EducationLevel, EducationEnrollment, EmploymentStatus, SourceOfIncomeSupport,
                 LivingArrangement, PriorAODTxtEpisodes, MentalHealthHistory, Diagnoses, OpioidReplacementTherapy,
                 NumberOfChildrenUnder18, SpecialPopulation, ChildBirthWithinLast5Years, NumberOfBirths, ClientPregnant,
@@ -289,7 +290,7 @@ namespace BehavioralHealth.Tests
             SourceOfIncomeSupport = null;
 
             // Act
-            Action result = () => new Admission(id, DateOfFirstContact, AdmissionDate, CompletelyPaidByMedicaid, LevelOfCare,
+            Action result = () => new Admission(id, currentClient, DateOfFirstContact, AdmissionDate, CompletelyPaidByMedicaid, LevelOfCare,
                 ReferredBy, MaritalStatus, EducationLevel, EducationEnrollment, EmploymentStatus, SourceOfIncomeSupport,
                 LivingArrangement, PriorAODTxtEpisodes, MentalHealthHistory, Diagnoses, OpioidReplacementTherapy,
                 NumberOfChildrenUnder18, SpecialPopulation, ChildBirthWithinLast5Years, NumberOfBirths, ClientPregnant,
@@ -310,7 +311,7 @@ namespace BehavioralHealth.Tests
             NumberOfChildrenUnder18 = -1;
 
             // Act
-            Action result = () => new Admission(id, DateOfFirstContact, AdmissionDate, CompletelyPaidByMedicaid, LevelOfCare,
+            Action result = () => new Admission(id, currentClient, DateOfFirstContact, AdmissionDate, CompletelyPaidByMedicaid, LevelOfCare,
                 ReferredBy, MaritalStatus, EducationLevel, EducationEnrollment, EmploymentStatus, SourceOfIncomeSupport,
                 LivingArrangement, PriorAODTxtEpisodes, MentalHealthHistory, Diagnoses, OpioidReplacementTherapy,
                 NumberOfChildrenUnder18, SpecialPopulation, ChildBirthWithinLast5Years, NumberOfBirths, ClientPregnant,
@@ -331,7 +332,7 @@ namespace BehavioralHealth.Tests
             NumberOfChildrenUnder18 = 100;
 
             // Act
-            Action result = () => new Admission(id, DateOfFirstContact, AdmissionDate, CompletelyPaidByMedicaid, LevelOfCare,
+            Action result = () => new Admission(id, currentClient, DateOfFirstContact, AdmissionDate, CompletelyPaidByMedicaid, LevelOfCare,
                 ReferredBy, MaritalStatus, EducationLevel, EducationEnrollment, EmploymentStatus, SourceOfIncomeSupport,
                 LivingArrangement, PriorAODTxtEpisodes, MentalHealthHistory, Diagnoses, OpioidReplacementTherapy,
                 NumberOfChildrenUnder18, SpecialPopulation, ChildBirthWithinLast5Years, NumberOfBirths, ClientPregnant,
@@ -342,6 +343,49 @@ namespace BehavioralHealth.Tests
             result.Should().Throw<ArgumentOutOfRangeException>()
                 .WithMessage("Number of Children Under 18 cannot be more than 99\nParameter name: Number of Children Under 18");
         }
+
+        [TestMethod]
+        [TestCategory("Undefined")]
+        public void Create_ClientIsNull_NullValueError()
+        {
+            // Arrange
+            Initialize();
+            Client currentClient = null;
+
+            // Act
+            Action result = () => new Admission(id, currentClient, DateOfFirstContact, AdmissionDate, CompletelyPaidByMedicaid, LevelOfCare,
+                ReferredBy, MaritalStatus, EducationLevel, EducationEnrollment, EmploymentStatus, SourceOfIncomeSupport,
+                LivingArrangement, PriorAODTxtEpisodes, MentalHealthHistory, Diagnoses, OpioidReplacementTherapy,
+                NumberOfChildrenUnder18, SpecialPopulation, ChildBirthWithinLast5Years, NumberOfBirths, ClientPregnant,
+                StageOfPregnancy, MilitaryStatus, ServedInIraq, ServedInAfghanistan, AlcoholAgeOfFirstIntox, DrugUse,
+                NumberOfArrestsPast30Days, Reimbursement, SelfHelp);
+
+            // Assert
+            result.Should().Throw<ArgumentException>()
+                .WithMessage("Client cannot be null\nParameter name: Admission Client");
+        }
+
+        //[TestMethod]
+        //[TestCategory("Unit")]
+        //public void Create_ChildBirthWithinLast5YearsTrueAndClientIsMale_InvalidValueError()
+        //{
+        //    // Arrange
+        //    Initialize();
+        //    ChildBirthWithinLast5Years = true;
+        //    Client currentClient = new Client(5, "Bob", "Tester", 10.October(1964), new Gender(GenderType.Male), new Race(RaceType.White), new Ethnicity(EthnicityType.NotOfHispanicOrigin));
+
+        //    // Act
+        //    Action result = () => new Admission(id, DateOfFirstContact, AdmissionDate, CompletelyPaidByMedicaid, LevelOfCare,
+        //        ReferredBy, MaritalStatus, EducationLevel, EducationEnrollment, EmploymentStatus, SourceOfIncomeSupport,
+        //        LivingArrangement, PriorAODTxtEpisodes, MentalHealthHistory, Diagnoses, OpioidReplacementTherapy,
+        //        NumberOfChildrenUnder18, SpecialPopulation, ChildBirthWithinLast5Years, NumberOfBirths, ClientPregnant,
+        //        StageOfPregnancy, MilitaryStatus, ServedInIraq, ServedInAfghanistan, AlcoholAgeOfFirstIntox, DrugUse,
+        //        NumberOfArrestsPast30Days, Reimbursement, SelfHelp);
+
+        //    // Assert
+        //    result.Should().Throw<ArgumentOutOfRangeException>()
+        //        .WithMessage("Childbirth within last 5 years cannot be true for client gender male\nParameter name: Childbirth Within Last 5 Years");
+        //}
         //Start here: Special Population
     }
 }
